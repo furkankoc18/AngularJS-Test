@@ -1,0 +1,72 @@
+<html>
+<head>
+	<script src="angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+	
+<body ng-app="uygulama">
+	<div ng-controller="uygCtrl">
+			<h3 style="text-align:center">Personel Listesi</h3>
+			<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Isim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">Dogum Tarihi</th>
+	  <th scope="col">Islem</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="personel in personelListesi">
+      <th scope="row">{{personelListesi.indexOf(personel)+1}}</th>
+      <td>{{personel.isim}}</td>
+      <td>{{personel.soyisim}}</td>
+      <td>{{personel.dogumTarihi}}</td>
+	  <td><input type="submit" value="Sil" ng-click="personelSil(personel)" class="btn btn-danger"></td>
+    </tr>
+   
+  </tbody>
+</table>
+		
+		<table>
+			<tr>
+				<td style="font-weight:bold;">Isim :</td>
+				<td><input type="text" ng-model="isim" class="form-control"></td>
+			</tr>
+			<tr>
+				<td style="font-weight:bold;">Soyisim :</td>
+				<td><input type="text" ng-model="soyisim" class="form-control"></td>
+			</tr>
+			<tr>
+				<td style="font-weight:bold;">Dogum Yil :</td>
+				<td><input type="text" ng-model="dogumTarihi" class="form-control"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Kaydet" ng-click="personelKayit()" class="btn btn-success"></td>
+			</tr>
+		</table>
+		
+	
+	
+	</div>
+	
+	<script>
+		var app=angular.module('uygulama',[]);
+		app.controller('uygCtrl',function($scope){
+		vm=$scope;
+			vm.personelListesi=[]
+		vm.personelKayit=function(){
+			vm.personelListesi.push({isim:vm.isim,soyisim:vm.soyisim,dogumTarihi:vm.dogumTarihi})
+		}
+		vm.personelSil=function(personel){
+			const index = vm.personelListesi.indexOf(personel);
+			vm.personelListesi.splice(index, 1);		
+			}
+
+		})
+	</script>
+</body>
+</html>
