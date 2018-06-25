@@ -1,0 +1,59 @@
+<html>
+	<head>
+	<script src="angular.min.js"></script>
+	<style>
+		td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+	</style>
+	</head>
+	<body ng-app="uygulama">
+	<div ng-controller="ctrl">
+		<form>
+				<table cellpadding="10">
+				<tr>
+					<th>Prog. Dil</th>
+					<th>Begenilen</th>
+					<th>Begenilmeyen</th>
+					<th>Islem</th>
+				</tr>
+					<tr ng-repeat="pg in programlama">
+						<td>{{pg.dil}}</td>
+						<td>{{pg.begendi}}</td>
+						<td>{{pg.begenmedi}}</td>
+						<td>
+							<input type="submit" value="Begen" ng-click="begen(pg.dil)"></input>
+							<input type="submit" value="Begenme" ng-click="begenme(pg.dil)"></input>
+						</td>
+					</tr>
+				</table>
+			</form>
+	</div>
+				<script>
+					var a=angular.module('uygulama',[]);
+					a.controller('ctrl',function($scope){
+						var programlama=[{dil:"php",begendi:0,begenmedi:0},{dil:"c++",begendi:0,begenmedi:0},{dil:"java",begendi:0,begenmedi:0}];
+						$scope.programlama=programlama;
+					
+						$scope.begen=function(dil){
+							if(dil=="php")
+								programlama[0].begendi++;
+							if(dil=="c++")	
+								programlama[1].begendi++;
+							if(dil=="java")
+								programlama[2].begendi++;
+						}
+						$scope.begenme=function(dil){
+							if(dil=="php")
+								programlama[0].begenmedi++;
+							if(dil=="c++")	
+								programlama[1].begenmedi++;
+							if(dil=="java")
+								programlama[2].begenmedi++;
+						}
+					})
+				</script>
+	</body>
+</html>
